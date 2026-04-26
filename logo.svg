@@ -1,0 +1,26 @@
+<svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+
+  <rect
+    x="5"
+    y="5"
+    width="90"
+    height="90"
+    rx="20"
+    fill="#0a0a0a"
+    stroke="#1E3A8A"
+    stroke-width="3"
+  />
+
+  <text
+    x="50%"
+    y="55%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="monospace"
+    font-size="44"
+    font-weight="700"
+    fill="#60A5FA">
+    WB
+  </text>
+
+</svg>
