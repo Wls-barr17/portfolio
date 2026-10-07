@@ -47,7 +47,7 @@ export const handler: ContactHandler = async (event) => {
     return json(400, 'Enter a valid email address.');
   if (message.length < 10 || message.length > 5000)
     return json(400, 'Message must be between 10 and 5,000 characters.');
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey)
     return json(
       503,
@@ -66,10 +66,22 @@ export const handler: ContactHandler = async (event) => {
       }),
       signal: AbortSignal.timeout(8000),
     });
+    const result = (await response.json().catch(() => ({}))) as {
+      id?: string;
+      message?: string;
+      name?: string;
+      statusCode?: number;
+    };
     if (!response.ok) {
-      console.error('Resend rejected contact email:', response.status);
+      // Keep provider details in Netlify logs for debugging; never expose them or the key to visitors.
+      console.error('Resend rejected contact email:', {
+        httpStatus: response.status,
+        errorName: result.name,
+        errorMessage: result.message,
+      });
       return json(502, 'Email delivery failed. Please try again or email directly.');
     }
+    console.info('Resend accepted contact email:', { emailId: result.id });
     return json(200, 'Message sent. Thanks for reaching out.');
   } catch (error) {
     console.error('Contact email request failed:', error);
