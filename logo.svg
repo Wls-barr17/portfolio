@@ -1,26 +1,5 @@
-<svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-
-  <rect
-    x="5"
-    y="5"
-    width="90"
-    height="90"
-    rx="20"
-    fill="#0a0a0a"
-    stroke="#1E3A8A"
-    stroke-width="3"
-  />
-
-  <text
-    x="50%"
-    y="55%"
-    text-anchor="middle"
-    dominant-baseline="middle"
-    font-family="monospace"
-    font-size="44"
-    font-weight="700"
-    fill="#60A5FA">
-    WB
-  </text>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect x="3" y="3" width="58" height="58" rx="14" fill="#0b100d" stroke="#b8ff55" stroke-opacity=".72" stroke-width="2"/>
+  <path d="M15 19h8l4 21 5-14 5 14 4-21h8l-7 28h-8l-2-7-2 7h-8l-7-28Z" fill="#e8eeeb"/>
+  <circle cx="51" cy="49" r="3" fill="#b8ff55"/>
 </svg>
