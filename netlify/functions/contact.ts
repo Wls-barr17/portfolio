@@ -66,10 +66,20 @@ export const handler: ContactHandler = async (event) => {
       }),
       signal: AbortSignal.timeout(8000),
     });
+    const result = (await response.json().catch(() => ({}))) as {
+      id?: string;
+      message?: string;
+      name?: string;
+    };
     if (!response.ok) {
-      console.error('Resend rejected contact email:', response.status);
+      console.error('Resend rejected contact email:', {
+        httpStatus: response.status,
+        errorName: result.name,
+        errorMessage: result.message,
+      });
       return json(502, 'Email delivery failed. Please try again or email directly.');
     }
+    console.info('Resend accepted contact email:', { emailId: result.id });
     return json(200, 'Message sent. Thanks for reaching out.');
   } catch (error) {
     console.error('Contact email request failed:', error);

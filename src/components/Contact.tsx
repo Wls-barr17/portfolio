@@ -20,6 +20,12 @@ export function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(Object.fromEntries(formData.entries())),
       });
+      const contentType = response.headers.get('content-type') ?? '';
+      if (!contentType.includes('application/json')) {
+        throw new Error(
+          'The contact service is unavailable. On Netlify, check that the latest deploy finished; locally, run `netlify dev`.',
+        );
+      }
       const result: { message?: string } = await response.json();
       if (!response.ok)
         throw new Error(result.message ?? 'Could not send your message. Please try again.');
